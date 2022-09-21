@@ -1,4 +1,3 @@
-from webbrowser import get
 from Tree import Tree
 from restaurantData import *
 
@@ -12,10 +11,7 @@ for node in root.children:
         if restaurant[0] is node.value:
             node.add_child(restaurant)
 
-#for node in root.children:
-    #print(node.children)
-
-#begining of user input
+#function to get user input
 def get_user_input(user_input = None):
     if user_input is None:
         user_input = input("What type of food would you like to eat today?\n")
@@ -37,12 +33,17 @@ def get_user_input(user_input = None):
         else:
             return get_user_input(user_input)
 
-            
+#function to search for restaurants based on the type you want
+def find_restaurants(tree_node, target = get_user_input()):
+    target_node = [type for type in tree_node.children if type.value == target]
+    for restaurant in target_node[0].children:
+        print(f"\nName: {restaurant[1]}\nPrice: {restaurant[2]}/5\nRatings: {restaurant[3]}/5\nLocation: {restaurant[4]}\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+               
         
 
-        
+find_restaurants(root)
 
-print(get_user_input())
 
 
 
