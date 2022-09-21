@@ -38,9 +38,11 @@ def find_restaurants(tree_node, target = get_user_input()):
     target_node = [type for type in tree_node.children if type.value == target]
     for restaurant in target_node[0].children:
         print(f"\nName: {restaurant[1]}\nPrice: {restaurant[2]}/5\nRatings: {restaurant[3]}/5\nLocation: {restaurant[4]}\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
-               
-        
+    user_input = input("Would you like to search for more restaurants? \"y\" for yes and any key for no.\n")
+    if user_input == "y":
+        find_restaurants(tree_node, target = get_user_input())
+    else:
+        print("Thanks for using FindFood!")
 
 find_restaurants(root)
 
