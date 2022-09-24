@@ -47,10 +47,16 @@ class MaxHeap:
         else:
             left_child = self.heap_list[self.left_child_idx(idx)]
             right_child = self.heap_list[self.right_child_idx(idx)]
-            if ord(left_child.value[0]) > ord(right_child.value[0]):
-                return self.left_child_idx(idx)
+            if left_child.value[0] != right_child.value[0]:
+                if ord(left_child.value[0]) > ord(right_child.value[0]):
+                    return self.left_child_idx(idx)
+                else:
+                    return self.right_child_idx(idx)
             else:
-                return self.right_child_idx(idx)
+                if ord(left_child.value[1]) > ord(right_child.value[1]):
+                    return self.left_child_idx(idx)
+                else:
+                    return self.right_child_idx(idx)
     
     def heapify_down(self):
         idx = 1

@@ -23,16 +23,6 @@ for node in list_2d:
             node.add_child(restaurant)
 
 list_2d = heap_sort(list_2d)
-
-root = Tree(None)
-for type in types:
-    root.children.append(Tree(type))
-
-for node in root.children:
-    for restaurant in restaurant_data:
-        if restaurant[0] is node.value:
-            node.add_child(restaurant)
-
 #function to get user input
 def get_user_input(user_input = None):
     if user_input is None:
@@ -56,29 +46,36 @@ def get_user_input(user_input = None):
             return get_user_input(user_input)
 
 #function to search for restaurants based on the type you want
-
-def search(lst, target = None):
-    if target is None:
-        target = get_user_input()
+def search(lst, target = get_user_input()):
     middle_idx = len(lst) // 2
-    if ord(lst[middle_idx].value[0]) > ord(target[0]):
-        for i in range(len(lst)):
-            if lst[i].value == target:
-                return lst[i].children
-    elif ord(lst[middle_idx].value[0]) < ord(target[0]):
-        for i in range(len(lst)):
-            if lst[-i].value == target:
-                return lst[-i].children
-    elif target == lst[middle_idx].value:
-        return lst[middle_idx].children
+    if lst[middle_idx].value[0] != target[0]:
+        if ord(lst[middle_idx].value[0]) > ord(target[0]):
+            for i in range(len(lst)):
+                if lst[i].value == target:
+                    return lst[i].children
+        elif ord(lst[middle_idx].value[0]) < ord(target[0]):
+            for i in range(len(lst)):
+                if lst[-i].value == target:
+                    return lst[-i].children
+        elif target == lst[middle_idx].value:
+            return lst[middle_idx].children
+        else:
+            return None
     else:
-        for i in range(len(lst)):
-            if lst[i].value == target:
-                return lst[i].children
-    return None
+        if ord(lst[middle_idx].value[1]) > ord(target[1]):
+            for i in range(len(lst)):
+                if lst[i].value == target:
+                    return lst[i].children
+        elif ord(lst[middle_idx].value[1]) < ord(target[1]):
+            for i in range(len(lst)):
+                if lst[-i].value == target:
+                    return lst[-i].children
+        elif target == lst[middle_idx].value:
+            return lst[middle_idx].children
+        else:
+            return None
 
 def find_restaurants():
-
     for restaurant in search(list_2d):
         print(f"\nName: {restaurant[1]}\nPrice: {restaurant[2]}/5\nRatings: {restaurant[3]}/5\nLocation: {restaurant[4]}\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     user_input = input("Would you like to search for more restaurants? \"y\" for yes and any key for no.\n")
@@ -87,15 +84,4 @@ def find_restaurants():
     else:
         print("Thanks for using FindFood!")
 
-
-
 find_restaurants()
-
-
-
-
-
-
-
-
-
